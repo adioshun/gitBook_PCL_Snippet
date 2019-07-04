@@ -1,13 +1,21 @@
-## 2. ROS-to-PCD
+#ROSbag to PCD
+
+rosbag 파일에서 PCD 파일을 추출 하는 방법은 두가지 입니다. 
+
+1. rosbag파일에서 직접 추출 하는 방법과 
+2. rosbag파일을 재생 후에 실시간으 추출 하는 방법 입니다. 이 방법은 실시간으로 수집되는 데이터를 PCD로 저장 하기에 유리 합니다. 
+
+
+## 1. rosbag파일에서 직접 추출 하는 방법
 
 bag파일에서 pcd파일을 추출 하시려면 아래의 명령어를 이용 하면 됩니다.
 
 ```
 $ rosrun pcl_ros bag_to_pcd lobby_lidar.bag /velodyne_points ./lobby_pcd
-# rosrun pcl_ros bag_to_pcd <input_file.bag> / <output_directory>
+# rosrun pcl_ros bag_to_pcd <input_file.bag> <topic> <output_directory>
 ```
 
-또는
+## 2. rosbag파일을 재생 하여 실시간으로 추출 하는 방법 
 
 ```python
 
