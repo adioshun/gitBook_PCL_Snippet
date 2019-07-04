@@ -6,7 +6,8 @@
 ## ROS
 
 * [README](ROS/README.md)
-* [ROS Converter](ROS/ros-converter.md)
 * [ROSbag to pickle](ROS/rosbag-to-pickle.md)
 * [ROSbag to PCD](ROS/rosbag-to-pcd.md)
+* [ROSbag to JPG  and AVI](ROS/rosbag-to-jpg-and-avi.md)
+* [ROSbag to Numpy](ROS/rosbag-to-numpy.md)
 
