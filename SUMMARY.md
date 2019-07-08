@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [PCD Converter](pcd-converter.md)
 * [Using a matrix to transform a point cloud](Using-a-matrix-to-transform-a-point-cloud.md)
+* [Octree를 이용한 배경 제거](Octree-based-Bg-Removal.md)
 * [Concatenating two point clouds](Concatenating-two-point-clouds.md)
 * [3D Point cloud to 2D Bird eye view](3D-Point-cloud-to-2D-Bird-eye-view.md)
 * [3D Point cloud to 2D Panorama view](3D-Point-cloud-to-2D-Panorama-view.md)
