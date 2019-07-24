@@ -116,6 +116,15 @@ Image(filename="./output/surround.png")
 - [Ronny Restrepo](http://ronny.rest/blog/post_2017_04_03_point_cloud_panorama/)
 
 
+---
+
+## [windowsub0406/KITTI_Tutorial](https://github.com/windowsub0406/KITTI_Tutorial)
+
+![](https://github.com/windowsub0406/KITTI_Tutorial/raw/master/images/pano.jpg)
+
+[Velodyne -> Panoramic Image](https://github.com/windowsub0406/KITTI_Tutorial/blob/master/Convert_Velo_2_Pano.ipynb):   Convert Velodyne data(model : HDL-64E) to panoramic image.
+
+
 
 
 
