@@ -101,3 +101,22 @@ if __name__ == "__main__":
 
 
 ---
+
+
+## PCD to npy (Open3D)
+
+```python 
+
+import open3d
+import numpy as np
+import glob
+
+import glob
+list = glob.glob('./*.pcd')
+for i in range(len(list)):
+    print(list[i])
+    point_cloud = open3d.read_point_cloud(list[i])
+    pc_array = np.asarray(point_cloud.points)
+    PATH = "./npy/" + list[i] + ".npy"
+    np.save(PATH, pc_array)
+```
