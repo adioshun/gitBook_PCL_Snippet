@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [PCD Converter](pcd-converter.md)
+* [Index정보 사용하기](get_indices.md)
 * [Using a matrix to transform a point cloud](Using-a-matrix-to-transform-a-point-cloud.md)
 * [Octree를 이용한 배경 제거](Octree-based-Bg-Removal.md)
 * [Concatenating two point clouds](Concatenating-two-point-clouds.md)
