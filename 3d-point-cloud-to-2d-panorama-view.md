@@ -1,14 +1,11 @@
-# Panorama(=Surround) view 
-
-
+# 3D Point cloud to 2D Panorama view
 
 ## 1. Creating 360 degree Panoramic Views
 
-- Project the `points in 3D` space into `cylindrical surface`
-
-- LiDAR센서의 특징에 따라 설정값이 달라 진다.
-- `h_res`: Horizontal resolution
-- `v_res`: vertical resolution
+* Project the `points in 3D` space into `cylindrical surface`
+* LiDAR센서의 특징에 따라 설정값이 달라 진다.
+* `h_res`: Horizontal resolution
+* `v_res`: vertical resolution
 
 ```python
 # KTTI dataset = Velodyne HDL 64E
@@ -24,21 +21,13 @@ v_fov = (-24.9, 2.0) # Field of view (-ve, +ve) along vertical axis
 v_fov_total = -v_fov[0] + v_fov[1]
 ```
 
-|- [Creating 360 degree Panoramic Views코드 및 설명(matplotlib)](http://ronny.rest/blog/post_2017_03_25_lidar_to_2d/)<br>- [Creating 360 degree Panoramic Views코드 및 설명(numpy)](http://ronny.rest/blog/post_2017_04_03_point_cloud_panorama/)|
-|-|
-
-
-
----
+| - [Creating 360 degree Panoramic Views코드 및 설명\(matplotlib\)](http://ronny.rest/blog/post_2017_03_25_lidar_to_2d/) - [Creating 360 degree Panoramic Views코드 및 설명\(numpy\)](http://ronny.rest/blog/post_2017_04_03_point_cloud_panorama/) |
+| :--- |
 
 
 ## 2. [Surround View](https://github.com/hengck23/didi-udacity-2017/blob/master/baseline-04/didi_data/lidar_surround.py)
 
-
-```python 
-
-
-
+```python
 SEED = 202
 
 import math
@@ -99,32 +88,14 @@ lidar = np.load("/root/share/project/didi/data/didi/didi-2/Data/1/15/lidar/15305
 surround, surround_img = lidar_to_surround(lidar)
 cv2.imwrite("./output/surround.png",surround_img)
 from IPython.display import Image
-Image(filename="./output/surround.png") 
-
-
+Image(filename="./output/surround.png")
 ```
 
+* [Ronny Restrepo](http://ronny.rest/blog/post_2017_04_03_point_cloud_panorama/)
 
-
-
-
-
-
-
----
-
-- [Ronny Restrepo](http://ronny.rest/blog/post_2017_04_03_point_cloud_panorama/)
-
-
----
-
-## [windowsub0406/KITTI_Tutorial](https://github.com/windowsub0406/KITTI_Tutorial)
+## [windowsub0406/KITTI\_Tutorial](https://github.com/windowsub0406/KITTI_Tutorial)
 
 ![](https://github.com/windowsub0406/KITTI_Tutorial/raw/master/images/pano.jpg)
 
-[Velodyne -> Panoramic Image](https://github.com/windowsub0406/KITTI_Tutorial/blob/master/Convert_Velo_2_Pano.ipynb):   Convert Velodyne data(model : HDL-64E) to panoramic image.
-
-
-
-
+[Velodyne -&gt; Panoramic Image](https://github.com/windowsub0406/KITTI_Tutorial/blob/master/Convert_Velo_2_Pano.ipynb): Convert Velodyne data\(model : HDL-64E\) to panoramic image.
 

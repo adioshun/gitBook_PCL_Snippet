@@ -1,64 +1,50 @@
-# Bird Eye(=Top) View
+# 3D Point cloud to 2D Bird eye view
 
 ## 1. ROS BEV to png
-https://github.com/mjshiggins/ros-examples
 
-```
+[https://github.com/mjshiggins/ros-examples](https://github.com/mjshiggins/ros-examples)
+
+```text
 rosrun lidar lidar_node
 토픽 : /points_raw
-
 ```
 
+## 2. ROS Height Map
 
+[velodyne\_height\_map](http://wiki.ros.org/velodyne_height_map): ROS, 3D Lidar를 2D BEV로 변경
 
----
+* ROS obstacle detection for 3D point clouds using a height map algorithm
 
-## 2. ROS Height Map 
-
-[velodyne_height_map](http://wiki.ros.org/velodyne_height_map): ROS, 3D Lidar를 2D BEV로 변경
-- ROS obstacle detection for 3D point clouds using a height map algorithm
-
-```
+```text
 libvtkproj4-6.2.so.6.2.0에러시
 sudo apt-get install libvtk6-dev
-
 ```
 
-rosrun velodyne_height_map heightmap_node _height_threshold:=0.05 #5cm 이상 크기
-
----
+rosrun velodyne\_height\_map heightmap\_node \_height\_threshold:=0.05 \#5cm 이상 크기
 
 ## 3. Creating Birdseye View of Point Cloud Data
 
-> 참고 : Height의 Level별 값 추출 (Height as Channels), [Creating Height Slices of Lidar Data](http://ronny.rest/blog/post_2017_03_27_lidar_height_slices/)
+> 참고 : Height의 Level별 값 추출 \(Height as Channels\), [Creating Height Slices of Lidar Data](http://ronny.rest/blog/post_2017_03_27_lidar_height_slices/)
 
 In order to create a birds eye view image, the relevant axes from the point cloud data will be the x and y axes.
 
 ![](http://i.imgur.com/cHsb48Y.png)
 
 조심해야 할점
-- the x, and y axes mean the opposite thing.
-- The x, and y axes point in the opposite direction.
-- You have to shift the values across so that (0,0) is the smallest possible value in the image.
+
+* the x, and y axes mean the opposite thing.
+* The x, and y axes point in the opposite direction.
+* You have to shift the values across so that \(0,0\) is the smallest possible value in the image.
+
+| - [Creating Birdseye View of Point Cloud Data 코드 및 설명\(python\)](http://ronny.rest/blog/post_2017_03_26_lidar_birds_eye/), [gist](https://gist.github.com/adioshun/12873804f472080c612e506310674797) |
+| :--- |
 
 
-|- [Creating Birdseye View of Point Cloud Data 코드 및 설명(python)](http://ronny.rest/blog/post_2017_03_26_lidar_birds_eye/), [gist](https://gist.github.com/adioshun/12873804f472080c612e506310674797)|
-|-|
+> \[참고\] cpp로 작성한 코드 : [mjshiggins's github](https://github.com/mjshiggins/ros-examples)
 
-> [참고] cpp로 작성한 코드 : [mjshiggins's github](https://github.com/mjshiggins/ros-examples)
-
-
----
-
-
-
-
-
-## 4. [Top View](https://github.com/hengck23/didi-udacity-2017/blob/master/baseline-04/didi_data/lidar_top.py) `by hengck23` (python)
-
+## 4. [Top View](https://github.com/hengck23/didi-udacity-2017/blob/master/baseline-04/didi_data/lidar_top.py) `by hengck23` \(python\)
 
 ```python
-
 SEED = 202
 import math
 import random
@@ -177,25 +163,19 @@ def lidar_to_top(lidar):
 
 
     return top, top_image
-    
+
 lidar = np.load("/root/share/project/didi/data/didi/didi-2/Data/1/15/lidar/1530509304325762000.npy")
 top, top_img = lidar_to_top(lidar)
 cv2.imwrite("./output/top.png",top_img)
 from IPython.display import Image
-Image(filename="./output/top.png") 
+Image(filename="./output/top.png")
 ```
 
----
+## 5. Top View `by ronny` \(python\)
 
-## 5. Top View `by ronny` (python)
-
-
-
-> http://ronny.rest/blog/post_2017_03_26_lidar_birds_eye/
-
+> [http://ronny.rest/blog/post\_2017\_03\_26\_lidar\_birds\_eye/](http://ronny.rest/blog/post_2017_03_26_lidar_birds_eye/)
 
 ```python
-
 from PIL import Image
 import numpy as np
 
@@ -292,11 +272,9 @@ def birds_eye_point_cloud(points,
         im.save(saveto)
     else:
         im.show()
-
-
 ```
 
-```
+```text
 # View a Square that is 10m on all sides of the car
 birds_eye_point_cloud(lidar, side_range=(-10, 10), fwd_range=(-10, 10), res=0.1, saveto="lidar_pil_01.png")
 
@@ -308,7 +286,7 @@ birds_eye_point_cloud(lidar, side_range=(-10, 10), fwd_range=(0, 20), res=0.1, s
 birds_eye_point_cloud(lidar, side_range=(-5, 5), fwd_range=(0, 20), res=0.1, saveto="lidar_pil_03.png")
 ```
 
-```
+```text
 data = np.asarray(input_pcl_xyz)
 
 
@@ -322,15 +300,11 @@ frame = birds_eye_point_cloud(data, side_range=(-10, 10), fwd_range=(-10, 10), r
 #bridge = CvBridge()
 image_pub = rospy.Publisher("image_topic_3",Image, queue_size=10)
 image_pub.publish(bridge.cv2_to_imgmsg(frame, "passthrough"))
-
 ```
 
-
----
-
-## [windowsub0406/KITTI_Tutorial](https://github.com/windowsub0406/KITTI_Tutorial)
+## [windowsub0406/KITTI\_Tutorial](https://github.com/windowsub0406/KITTI_Tutorial)
 
 ![](https://github.com/windowsub0406/KITTI_Tutorial/raw/master/images/topview.jpg)
 
-[Velodyne -> Top-View Image](https://github.com/windowsub0406/KITTI_Tutorial/blob/master/Convert_Velo_2_Topview.ipynb):    : Convert Velodyne data(model : HDL-64E) to Top-view image.
+[Velodyne -&gt; Top-View Image](https://github.com/windowsub0406/KITTI_Tutorial/blob/master/Convert_Velo_2_Topview.ipynb): : Convert Velodyne data\(model : HDL-64E\) to Top-view image.
 

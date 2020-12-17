@@ -1,9 +1,8 @@
-// Color-based region growing segmentation
-// http://pointclouds.org/documentation/tutorials/region_growing_rgb_segmentation.php#region-growing-rgb-segmentation
+# Index정보 사용하기
 
+// Color-based region growing segmentation // [http://pointclouds.org/documentation/tutorials/region\_growing\_rgb\_segmentation.php\#region-growing-rgb-segmentation](http://pointclouds.org/documentation/tutorials/region_growing_rgb_segmentation.php#region-growing-rgb-segmentation)
 
-결과 값으로 Index정보를 얻어 사용 
-
+결과 값으로 Index정보를 얻어 사용
 
 ```cpp
   pcl::IndicesPtr indices (new std::vector <int>);  // 중요
@@ -40,3 +39,4 @@
   reg.setRegionColorThreshold (5);
   reg.setMinClusterSize (600);
 ```
+

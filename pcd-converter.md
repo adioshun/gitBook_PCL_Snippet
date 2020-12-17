@@ -1,8 +1,10 @@
-## bin-to-pcd / pcd-to-bin 
+# PCD Converter
 
-> PCL-Python 기반 
+## bin-to-pcd / pcd-to-bin
 
-```python 
+> PCL-Python 기반
+
+```python
 # from Bin 
 raw_lidar = np.fromfile('/datasets/testing/velodyne/000001.bin', dtype=np.float32).reshape((-1, 4))
 #points = np.fromfile(v_path, dtype=np.float32, count=-1).reshape([-1, num_features]) #SECOND code 
@@ -19,15 +21,11 @@ pa = pc_rgb.to_array()
 pa.tofile('/workspace/_pcd/1540261303.747807979.bin')
 ```
 
-
-
----
-
 ## txt-to-pcd
 
-> Open3D-Python 기반 
+> Open3D-Python 기반
 
-```python 
+```python
 import os
 import subprocess
 import shutil
@@ -95,18 +93,12 @@ if __name__ == "__main__":
     for file_prefix in all_file_prefixes:
         point_cloud_txt_to_pcd(raw_dir, file_prefix)
 ```
-> PCL-Cpp 기반 :  https://blog.csdn.net/qq_22170875/article/details/90140851
 
+> PCL-Cpp 기반 : [https://blog.csdn.net/qq\_22170875/article/details/90140851](https://blog.csdn.net/qq_22170875/article/details/90140851)
 
+## PCD to npy \(Open3D\)
 
-
----
-
-
-## PCD to npy (Open3D)
-
-```python 
-
+```python
 import open3d
 import numpy as np
 import glob
@@ -120,3 +112,4 @@ for i in range(len(list)):
     PATH = "./npy/" + list[i] + ".npy"
     np.save(PATH, pc_array)
 ```
+

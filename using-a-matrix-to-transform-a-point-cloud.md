@@ -1,11 +1,12 @@
-# [Using a matrix to transform a point cloud](http://pointclouds.org/documentation/tutorials/matrix_transform.php#matrix-transform)
+# Using a matrix to transform a point cloud
 
-> Jupyter 버젼은 [[이곳]](https://github.com/adioshun/gitBook_Tutorial_PCL/blob/master/Snippets/Using-a-matrix-to-transform-a-point-cloud.ipynb)에서 확인 가능 합니다. 
+## [Using a matrix to transform a point cloud](http://pointclouds.org/documentation/tutorials/matrix_transform.php#matrix-transform)
 
+> Jupyter 버젼은 [\[이곳\]](https://github.com/adioshun/gitBook_Tutorial_PCL/blob/master/Snippets/Using-a-matrix-to-transform-a-point-cloud.ipynb)에서 확인 가능 합니다.
 
-## 1. using a Matrix4
+### 1. using a Matrix4
 
-```
+```text
   /* Reminder: how transformation matrices work :
 
            |-------> This column is the translation
@@ -20,7 +21,6 @@
 ```
 
 ```cpp
-
 #include <iostream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
@@ -64,19 +64,13 @@ main (int argc, char** argv)
 
   return 0;
 }
-
 ```
 
+### 2. Using a Affine3f
 
----
-
-## 2. Using a Affine3f
-
-- This method is easier and less error prone
-
+* This method is easier and less error prone
 
 ```cpp
-
 #include <iostream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
@@ -117,20 +111,13 @@ main (int argc, char** argv)
 
   return 0;
 }
-
 ```
 
+### Tip. 바로 시각화
 
----
+white = original point cloud red = transformed point cloud
 
-
-## Tip. 바로 시각화 
-
-white  = original point cloud
-red  = transformed point cloud
-
-```cpp 
-
+```cpp
   // Visualization
 
   pcl::visualization::PCLVisualizer viewer ("Matrix transformation example");
@@ -152,23 +139,20 @@ red  = transformed point cloud
   while (!viewer.wasStopped ()) { // Display the visualiser until 'q' key is pressed
     viewer.spinOnce ();
   }
-
 ```
 
-```
+```text
 $ pcl_viewer room_scan1.pcd room_scan1_transformed_cloud.pcd
-$ pcl_viewer room_scan1.pcd room_scan2.pcd 
+$ pcl_viewer room_scan1.pcd room_scan2.pcd
 ```
 
+| ![](https://i.imgur.com/BLX32n2.png) | ![](https://i.imgur.com/u6uushL.png) |
+| :--- | :--- |
+|  |  |
 
-|![](https://i.imgur.com/BLX32n2.png)|![](https://i.imgur.com/u6uushL.png)|
-|-|-|
-|||
+## ROS 사용자용
 
-
-# ROS 사용자용 
-
-ROS에서는 자체 명령어로 좌표계 변환을 지원 하고 있습니다. 
+ROS에서는 자체 명령어로 좌표계 변환을 지원 하고 있습니다.
 
 ```python
 rosrun tf static_transform_publisher 0 0 0 0 0 0 velodyne velodyne_201 10
@@ -176,25 +160,21 @@ rosrun tf static_transform_publisher 0 0 0 0 0 0 velodyne velodyne_201 10
 # static_transform_publisher x y z qx qy qz qw frame_id child_frame_id  period_in_ms
 ```
 
-여기서 yaw, pitch, roll는 각 z,y,x의 Rotation 정도 입니다. qx, qy, qz, qw는 quaternion표기값입니다. 
+여기서 yaw, pitch, roll는 각 z,y,x의 Rotation 정도 입니다. qx, qy, qz, qw는 quaternion표기값입니다.
 
-각 단위는 아래와 같습니다. 
+각 단위는 아래와 같습니다.
 
-|x,y,z|Meter||
-|-|-|-|
-|yaw, pitch, roll|Radians||
-|period|ms.|100ms (10hz)추천|
+| x,y,z | Meter |  |
+| :--- | :--- | :--- |
+| yaw, pitch, roll | Radians |  |
+| period | ms. | 100ms \(10hz\)추천 |
 
-- Rotation matrix Vs. Euler angle 변환 [코드](https://www.learnopencv.com/rotation-matrix-to-euler-angles/), [웹사이트](https://www.andre-gaschler.com/rotationconverter/) ,[시각화검증](http://danceswithcode.net/engineeringnotes/rotations_in_3d/demo3D/rotations_in_3d_tool.html)
+* Rotation matrix Vs. Euler angle 변환 [코드](https://www.learnopencv.com/rotation-matrix-to-euler-angles/), [웹사이트](https://www.andre-gaschler.com/rotationconverter/) ,[시각화검증](http://danceswithcode.net/engineeringnotes/rotations_in_3d/demo3D/rotations_in_3d_tool.html)
+* [http://www.lfd.uci.edu/~gohlke/code/transformations.py.html](http://www.lfd.uci.edu/~gohlke/code/transformations.py.html)
 
-- http://www.lfd.uci.edu/~gohlke/code/transformations.py.html 
+### ROS
 
-
----
-
-## ROS 
-
-```python 
+```python
 #!/usr/bin/env python3
 # coding: utf-8
 
@@ -238,12 +218,12 @@ def icp(input_pcl):
 
     new_data = np.delete(new_data, (3), axis=1)
     new_data = np.delete(new_data, (new_data.shape[0]-1), axis=0)
-    
+
     new_cloud = pcl.PointCloud()
     new_cloud.from_array(new_data)
-    
 
-    
+
+
 
 
     new_cloud = pcl_helper.XYZ_to_XYZRGB(new_cloud,[255,255,255])
@@ -251,7 +231,7 @@ def icp(input_pcl):
     return new_cloud
 
 def callback(input_ros_msg):
-    
+
     pcl_xyzrgb = pcl_helper.ros_to_pcl(input_ros_msg) #ROS 메시지를 PCL로 변경    
     calibrated_pcl = icp(pcl_xyzrgb) # 탐지 영역(RoI) 설정 
     roi_ros_msg = pcl_helper.pcl_to_ros(calibrated_pcl) #PCL을 ROS 메시지로 변경 
@@ -260,7 +240,7 @@ def callback(input_ros_msg):
 
 
 if __name__ == "__main__":
-    
+
     rospy.init_node('myopen3d_node', anonymous=True)
     rospy.Subscriber('/velodyne_bg_202', PointCloud2, callback)    
     """ 
@@ -271,3 +251,4 @@ if __name__ == "__main__":
 
     rospy.spin()
 ```
+
